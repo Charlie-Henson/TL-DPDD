@@ -1,1 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management System (CSS Grid)</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f9; 
+            min-height: 100vh;
+        }
 
+        header { 
+            background-color: #333; 
+            color: white; 
+            padding: 1em; 
+            text-align: center; 
+            /* Grid Property: Ensure header spans across both columns */
+            grid-column: 1 / 3; 
+        }
+
+        /* --- Grid Container for the Main Layout --- */
+        .grid-container {
+            display: grid;
+            /* Defines two columns: 
+               1. 250px for the sidebar 
+               2. 1 fraction (1fr) for the main content */
+            grid-template-columns: 250px 1fr; 
+            grid-template-rows: auto 1fr; /* Rows: header (auto) and content (1fr) */
+            min-height: 100vh;
+        }
+
+        /* --- Sidebar Styles (First Column) --- */
+        .sidebar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            /* Grid Property: Place in the first column, spanning all rows */
+            grid-column: 1 / 2;
+            grid-row: 2 / 3; 
+            position: sticky; /* Keeps it in place as content scrolls */
+            top: 0;
+            height: 100%;
+        }
+
+        .sidebar nav {
+            padding-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 10px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #4a627a;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            padding-left: 15px;
+        }
+        
+        /* --- Login Box Styles --- */
+        .login-box h4 {
+            margin-top: 30px;
+            color: #ecf0f1;
+            border-bottom: 1px solid #7f8c8d;
+            padding-bottom: 5px;
+        }
+
+        .login-box label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .login-box input[type="text"], .login-box input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 10px 0;
+            display: inline-block;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        .login-box button {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* --- Main Content Area Styles (Second Column) --- */
+        .main-content {
+            /* Grid Property: Place in the second column */
+            grid-column: 2 / 3;
+            padding: 0;
+        }
+
+        .container { 
+            width: 95%; /* Adjusting width since we don't need padding/margins to push it over */
+            margin: 20px auto; 
+            padding: 20px; 
+            background-color: white; 
+            border-radius: 8px; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+        
+        /* Table Styles */
+        h2 { border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 20px; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; color: #333; }
+    </style>
+</head>
+<body>
+
+    <div class="grid-container">
+
+        <header>
+            <h1>Inventory Control Dashboard</h1>
+        </header>
+
+        <div class="sidebar">
+            
+            <nav>
+                <h3>Stock Management</h3>
+                <a href="#">**Add Stock**</a>
+                <a href="#">**Edit Stock**</a>
+
+                <hr style="border-color: #4a627a;">
+
+                <h3>Product Management</h3>
+                <a href="#product-master">Product Master</a>
+                <a href="#">**Add Product**</a>
+                <a href="#">**Edit Product**</a>
+
+                <hr style="border-color: #4a627a;">
+
+                <h3>User Management</h3>
+                <a href="#">**Add User**</a>
+                <a href="#">**Manage User**</a>
+                <a href="#">**Delete User**</a>
+            </nav>
+            
+            <div class="login-box">
+                <h4>User Login</h4>
+                <form action="#" method="POST">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="container">
+                
+                <h2 id="product-master">1. Product Master List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product ID (SKU)</th>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Unit of Measure</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-SHRT-BLU-S</td>
+                            <td>Cotton T-Shirt (S)</td>
+                            <td>100% Cotton, Crew Neck</td>
+                            <td>Each</td>
+                            <td>Apparel</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2 id="inventory-tracking">2. Inventory Tracking</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product ID (SKU)</th>
+                            <th>Current Stock Level</th>
+                            <th>Location/Bin</th>
+                            <th>Reorder Point</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>T-SHRT-BLU-S</td>
+                            <td>125</td>
+                            <td>Aisle 4, Shelf C</td>
+                            <td>50</td>
+                            <td>2025-09-28 16:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2 id="receiving">3. Inbound/Receiving Log</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Receiving ID</th>
+                            <th>Product ID (SKU)</th>
+                            <th>Quantity Received</th>
+                            <th>Date Received</th>
+                            <th>Supplier/Vendor</th>
+                            <th>Cost Per Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>REC-2025-09-123</td>
+                            <td>T-SHRT-BLU-S</td>
+                            <td>100</td>
+                            <td>2025-09-15</td>
+                            <td>Textile Supply Co.</td>
+                            <td>$4.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2 id="shipping">4. Outbound/Sales Log</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Shipment/Order ID</th>
+                            <th>Product ID (SKU)</th>
+                            <th>Quantity Shipped</th>
+                            <th>Date Shipped</th>
+                            <th>Customer/Recipient</th>
+                            <th>Sales Price Per Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ORD-00145</td>
+                            <td>T-SHRT-BLU-S</td>
+                            <td>25</td>
+                            <td>2025-09-28</td>
+                            <td>Jane Doe</td>
+                            <td>$12.99</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
